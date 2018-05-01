@@ -5,8 +5,9 @@ import User from '../entities/users'
 @JsonController()
 export default class UserController {
   @Get('/users')
-  allPages(){
-    return User.find()
+  async allPages(){
+    const users = await User.find()
+    return { users }
   }
   @Post('/users')
   createUser(
