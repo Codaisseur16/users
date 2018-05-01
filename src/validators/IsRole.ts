@@ -1,6 +1,6 @@
 import { ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments } from "class-validator";
 
-@ValidatorConstraint({ name: "customText", async: false })
+@ValidatorConstraint({ name: "role", async: false })
 export class IsRole implements ValidatorConstraintInterface {
 
   validate(text: string, args: ValidationArguments) {

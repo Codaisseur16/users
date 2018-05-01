@@ -31,7 +31,7 @@ export default class User extends BaseEntity {
   password: string
 
   @Validate(IsRole)
-  @Column('text', {nullable: false, default: 'student'})
+  @Column('text', {nullable: false , default: 'student'})
   rights: Role
 
 }
