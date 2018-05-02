@@ -2,10 +2,9 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 import { BaseEntity } from 'typeorm/repository/BaseEntity'
 import { Exclude } from "class-transformer";
 import { IsEmail, IsString, Validate} from 'class-validator'
-import {IsRole} from '../validators/IsRole'
+import * as bcrypt from 'bcrypt'
 
 
-type Role = 'teacher' | 'student'
 
 @Entity()
 export default class User extends BaseEntity {
@@ -30,8 +29,17 @@ export default class User extends BaseEntity {
   @Exclude({ toPlainOnly: true })
   password: string
 
-  @Validate(IsRole)
-  @Column('text', {nullable: false , default: 'student'})
-  rights: Role
+  async setPassword(rawPassword: string) {
+  const hash = await bcrypt.hash(rawPassword, 10)
+  this.password = hash
+  }
+
+  checkPassword(rawPassword: string): Promise<boolean> {
+  return bcrypt.compare(rawPassword, this.password)
+  }
+
+  @Column('boolean', {nullable: false, default: false})
+  rights: boolean
+  }
 
 }

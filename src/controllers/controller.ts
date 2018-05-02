@@ -18,13 +18,17 @@ export default class UserController {
     const user = await User.findOneById(id)
     return { user }
   }
+
   // creates a user
   @Post('/users')
   @HttpCode(201)
-  createUser(
+  async createUser(
     @Body() user: User
   ) {
-    return user.save()
+    const {password, ...rest} = user
+    const entity = User.create(rest)
+    await entity.setPassword(password)
+    return entity.save()
   }
   // edits a user
   @Put('/users/:id')
@@ -36,7 +40,8 @@ export default class UserController {
     if (!user) throw new NotFoundError('User doesn\'t exist')
 
     return User.merge(user, update).save()
-  }
+    }
+
   // deletes a user
   @Delete('/users/:id')
   async deleteUser(
