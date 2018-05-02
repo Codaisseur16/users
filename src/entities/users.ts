@@ -27,7 +27,7 @@ export default class User extends BaseEntity {
   password: string
 
 // false = no rights, therefore you are a student
-  @Column('boolean', {nullable: false, default: false})
-  rights: boolean
+  @Column('boolean', {nullable: false})
+  teacher: boolean
 
 }
