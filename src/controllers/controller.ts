@@ -44,7 +44,7 @@ export default class UserController {
 
     return User.merge(user, update).save()
   }
-
+  
   // deletes a user
   @Delete('/users/:id')
   async deleteUser(
