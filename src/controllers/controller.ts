@@ -21,7 +21,6 @@ export default class UserController {
 
   // creates a user
   @Post('/users')
-  @HttpCode(201)
   async createUser(
     @Body() user: User
   ) {
@@ -32,6 +31,7 @@ export default class UserController {
   }
   // edits a user
   @Put('/users/:id')
+  // @HttpCode(200)
   async editUser(
     @Param('id') id: number,
     @Body() update : Partial<User>
