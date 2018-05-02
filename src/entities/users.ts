@@ -2,12 +2,9 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 import { BaseEntity } from 'typeorm/repository/BaseEntity'
 import { Exclude } from "class-transformer";
 import { IsEmail, IsString, Validate} from 'class-validator'
-// import {IsRole} from '../validators/IsRole'
 import * as bcrypt from 'bcrypt'
 
 
-
-// type Role = 'teacher' | 'student'
 
 @Entity()
 export default class User extends BaseEntity {
@@ -41,8 +38,8 @@ export default class User extends BaseEntity {
   return bcrypt.compare(rawPassword, this.password)
   }
 
-  // @Validate(IsRole, {message: 'Incorrect role'})
-  
   @Column('boolean', {nullable: false, default: false})
   rights: boolean
+  }
+
 }

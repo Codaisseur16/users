@@ -3,7 +3,6 @@ import User from '../entities/users'
 
 @JsonController()
 export default class UserController {
-
   // requests all users
   @Get('/users')
   async allUsers(){
@@ -11,7 +10,6 @@ export default class UserController {
     if (!users) throw new NotFoundError('Users table doesn\'t exist')
     return {users}
   }
-
   // requests one user
   @Get('/users/:id')
   async user(
@@ -32,7 +30,6 @@ export default class UserController {
     await entity.setPassword(password)
     return entity.save()
   }
-
   // edits a user
   @Put('/users/:id')
   async editUser(
@@ -43,7 +40,7 @@ export default class UserController {
     if (!user) throw new NotFoundError('User doesn\'t exist')
 
     return User.merge(user, update).save()
-  }
+    }
 
   // deletes a user
   @Delete('/users/:id')
