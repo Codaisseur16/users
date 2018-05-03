@@ -4,7 +4,6 @@ import { Exclude } from "class-transformer";
 import { IsEmail, IsString} from 'class-validator'
 import * as bcrypt from 'bcrypt'
 
-
 @Entity()
 export default class User extends BaseEntity {
 
