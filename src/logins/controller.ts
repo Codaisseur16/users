@@ -19,13 +19,21 @@ export default class LoginController {
     @Body() { email, password }: AuthenticatePayload
   ) {
     const user = await User.findOne({ where: { email } })
-    console.log(password)
+    // console.log(password)
     if (!user) throw new BadRequestError('A user with this email does not exist')
-    console.log(await user.checkPassword(password))
+    // console.log(await user.checkPassword(password))
 
     if (!await user.checkPassword(password)) throw new BadRequestError('The password is not correct')
-    const id = user.id
-    return {id}
+    
+    const userDetails = {
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      teacher: user.teacher
+
+    }
+    return {userDetails}
 
   }
 }
