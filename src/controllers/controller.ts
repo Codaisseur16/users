@@ -18,16 +18,20 @@ export default class UserController {
     const user = await User.findOneById(id)
     return { user }
   }
+
   // creates a user
   @Post('/users')
-  @HttpCode(201)
-  createUser(
+  async createUser(
     @Body() user: User
   ) {
-    return user.save()
+    const {password, ...rest} = user
+    const entity = User.create(rest)
+    await entity.setPassword(password)
+    return entity.save()
   }
   // edits a user
   @Put('/users/:id')
+  // @HttpCode(200)
   async editUser(
     @Param('id') id: number,
     @Body() update : Partial<User>
@@ -37,6 +41,7 @@ export default class UserController {
 
     return User.merge(user, update).save()
   }
+  
   // deletes a user
   @Delete('/users/:id')
   async deleteUser(

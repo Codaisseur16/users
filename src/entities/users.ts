@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 import { BaseEntity } from 'typeorm/repository/BaseEntity'
 import { Exclude } from "class-transformer";
 import { IsEmail, IsString} from 'class-validator'
+import * as bcrypt from 'bcrypt'
 
 @Entity()
 export default class User extends BaseEntity {
@@ -26,8 +27,15 @@ export default class User extends BaseEntity {
   @Exclude({ toPlainOnly: true })
   password: string
 
-// false = no rights, therefore you are a student
+  async setPassword(rawPassword: string) {
+  const hash = await bcrypt.hash(rawPassword, 10)
+  this.password = hash
+  }
+
+  checkPassword(rawPassword: string): Promise<boolean> {
+  return bcrypt.compare(rawPassword, this.password)
+  }
+
   @Column('boolean', {nullable: false})
   teacher: boolean
-
 }

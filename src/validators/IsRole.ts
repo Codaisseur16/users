@@ -1,6 +1,7 @@
 import { ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments } from "class-validator";
 
-@ValidatorConstraint({ name: "role", async: false })
+@ValidatorConstraint({ name: "customText", async: false })
+
 export class IsRole implements ValidatorConstraintInterface {
 
   validate(text: string, args: ValidationArguments) {
@@ -12,5 +13,4 @@ export class IsRole implements ValidatorConstraintInterface {
     console.log(args)
     return "Incorrect role";
   }
-
 }
