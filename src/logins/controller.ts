@@ -25,15 +25,7 @@ export default class LoginController {
 
     if (!await user.checkPassword(password)) throw new BadRequestError('The password is not correct')
     
-    const userDetails = {
-      id: user.id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      teacher: user.teacher
-
-    }
-    return {userDetails}
+    return {user}
 
   }
 }

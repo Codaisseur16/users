@@ -8,6 +8,7 @@ import LoginController from './logins/controller'
 const port = process.env.PORT || 4008
 
 const app = createKoaServer({
+  cors: true,
   controllers: [
     UserController,
     LoginController
