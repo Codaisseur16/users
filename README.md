@@ -31,6 +31,6 @@ The app, still in progress, is a Quiz Creator Tool (modelled around TypeForm), a
 5. run node . or nodemon .
 6. happy hacking! 👌
 
-###To do:
+### To do:
 - Finish the Quiz app
 - Refactor
